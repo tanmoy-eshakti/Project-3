@@ -2,7 +2,6 @@
 pygam
 sklearn
 matplotlib
-numexpr
 pip>=22.3
 
 
