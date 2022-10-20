@@ -9,11 +9,11 @@ import numpy as np
 import pandas as pd
 from pygam import LinearGAM, s
 from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
-import os
-os.environ['NUMEXPR_MAX_THREADS'] = '16'
-import numexpr as ne
+#from sklearn.model_selection import train_test_split
+#import matplotlib.pyplot as plt
+#import os
+#os.environ['NUMEXPR_MAX_THREADS'] = '16'
+#import numexpr as ne
 
 data = pd.read_csv('New Item Offline.csv')
 data['conversion'] = data['Orders']/data['Users']
