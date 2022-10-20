@@ -1,3 +1,8 @@
 
 pygam
 sklearn
+matplotlib
+os
+numexpr
+
+
