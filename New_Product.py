@@ -65,7 +65,8 @@ X_test = {
   "Silhouette": np.where(np.unique(X6)==Silhouette)}
 
 predictions = model.predict(pd.DataFrame(X_test))
-st.write('Predicted Likelihood % for the new product:', predictions*100'%')
+probability = predictions * 100
+st.write('Likelihood % for the new product: ',probability) st.write('%')
 
 #gam.summary()
 
