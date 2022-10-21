@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from pygam import LinearGAM, s
 from sklearn import preprocessing
+from sklearn.svm import SVR
 #from sklearn.model_selection import train_test_split
 #import matplotlib.pyplot as plt
 #import os
@@ -16,7 +17,10 @@ from sklearn import preprocessing
 #import numexpr as ne
 
 data = pd.read_csv('New Item Offline.csv')
-data['conversion'] = data['Orders']/data['Users']
+
+#Pageview per user
+Viewperuser = 242222765/17903179
+data['conversion'] = data['Orders']/(data['Users']*Viewperuser)
 data.fillna('', inplace=True)
 #df = pd.DataFrame(data,columns=['Productid','ProductStyle','Color','ColorGroup','Fabric','Occassion','Silhouette','Season','Pattern','FabricType'])
 le = preprocessing.LabelEncoder()
@@ -37,11 +41,13 @@ X3 = le.inverse_transform(data['Pattern'])
 #LabelEncoder()
 
 
-
 X = data[['ProductStyle','ColorGroup','Pattern','Season','Occassion','Silhouette']]
 y = data['conversion']
-gam = LinearGAM().fit(X,y)
 
+#gam = LinearGAM().fit(X,y)
+#Building SVR Model
+model = SVR(kernel='linear') # set kernel and hyperparameters
+svr = model.fit(X,y)
 
 ProductStyle = st.selectbox('Choose your Type Of Clothing',('Denim Dress','Denim Jacket','Denim Shirts','Denim Skirt','Dress','Jacket','Jeans','Jumpsuit','Pant','Skirt','Top'))
 ColorGroup = st.selectbox('Choose your Type Of Color Type',('Beige','Black','Blue','Brown','Gold','Gray','Green','Indigo','Multi-colored','Orange','Pink','Purple','Red','Violet','White','Yellow'))
@@ -58,8 +64,8 @@ X_test = {
   "Occassion": np.where(np.unique(X5)==Occassion),
   "Silhouette": np.where(np.unique(X6)==Silhouette)}
 
-predictions = gam.predict(pd.DataFrame(X_test))
-st.write('Predicted Conversion (No. of Orders per User) for the above product:', predictions)
+predictions = model.predict(pd.DataFrame(X_test))
+st.write('Predicted Likelihood % for the new product:', predictions*100'%')
 
 #gam.summary()
 
