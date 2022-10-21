@@ -66,7 +66,7 @@ X_test = {
 
 predictions = model.predict(pd.DataFrame(X_test))
 probability = predictions * 100
-st.write('Likelihood % for the new product: ',probability) st.text('%')
+st.write('Likelihood % for the new product: ',+ str(probability(0)) + '%')
 
 #gam.summary()
 
