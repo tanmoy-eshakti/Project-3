@@ -42,12 +42,12 @@ X3 = le.inverse_transform(data['Pattern'])
 X = data[['ProductStyle','ColorGroup','Pattern','Season','Occassion','Silhouette']]
 y = data['conversion']
 
-ProductStyle = st.selectbox('Choose your Type Of Clothing',('Denim Dress','Denim Jacket','Denim Shirts','Denim Skirt','Dress','Jacket','Jeans','Jumpsuit','Pant','Skirt','Top'))
-ColorGroup = st.selectbox('Choose your Type Of Color Type',('Beige','Black','Blue','Brown','Gold','Gray','Green','Indigo','Multi-colored','Orange','Pink','Purple','Red','Violet','White','Yellow'))
-Pattern = st.selectbox('Choose your Type Of Print',('Animal Print','Colorblock','Floral','Graphic','Plaid','Stripes','Whimsical'))
-Season = st.selectbox('You are most likely to use clothing during?',('Bridal','Fall','Winter','Fall-Winter','Fall/Winter','Neutral','Perennial','Spring','Spring/Summer','Summer','Wedding'))
-Occassion = st.selectbox('Choose your most likely occassion',('Party','Special Occasion','Vacation','Work'))
-Silhouette = st.selectbox('If Dress is your type of clothing, what is your preferred Silhouette?',('A-Line','Fit-and-flare','Maxi','Sheath','Shift','Shirtdress','Wrap'))
+ProductStyle = st.selectbox('Choose your Type Of Clothing',('Denim Dress','Denim Jacket','Denim Shirts','Denim Skirt','Dress','Jacket','Jeans','Jumpsuit','Pant','Skirt','Top','None'))
+ColorGroup = st.selectbox('Choose your Type Of Color Type',('Beige','Black','Blue','Brown','Gold','Gray','Green','Indigo','Multi-colored','Orange','Pink','Purple','Red','Violet','White','Yellow','None'))
+Pattern = st.selectbox('Choose your Type Of Print',('Animal Print','Colorblock','Floral','Graphic','Plaid','Stripes','Whimsical','None'))
+Season = st.selectbox('You are most likely to use clothing during?',('Fall','Winter','Fall-Winter','Fall/Winter','Neutral','Perennial','Spring','Spring/Summer','Summer'))
+Occassion = st.selectbox('Choose your most likely occassion',('Party','Special Occasion','Vacation','Work','wedding','None'))
+Silhouette = st.selectbox('If Dress is your type of clothing, what is your preferred Silhouette?',('A-Line','Fit-and-flare','Maxi','Sheath','Shift','Shirtdress','Wrap','None'))
 
 X_test = {
   "ProductStyle": np.where(np.unique(X1)==ProductStyle),
