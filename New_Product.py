@@ -10,13 +10,11 @@ import pandas as pd
 from pygam import LinearGAM, s
 from sklearn import preprocessing
 from sklearn.svm import SVR
-#from sklearn.model_selection import train_test_split
-#import matplotlib.pyplot as plt
-#import os
-#os.environ['NUMEXPR_MAX_THREADS'] = '16'
-#import numexpr as ne
+import pickle
+
 
 data = pd.read_csv('New Item Offline.csv')
+filename = 'finalized_model.sav'
 
 #Pageview per user
 Viewperuser = 242222765/17903179
@@ -44,11 +42,6 @@ X3 = le.inverse_transform(data['Pattern'])
 X = data[['ProductStyle','ColorGroup','Pattern','Season','Occassion','Silhouette']]
 y = data['conversion']
 
-#gam = LinearGAM().fit(X,y)
-#Building SVR Model
-model = SVR(kernel='linear') # set kernel and hyperparameters
-svr = model.fit(X,y)
-
 ProductStyle = st.selectbox('Choose your Type Of Clothing',('Denim Dress','Denim Jacket','Denim Shirts','Denim Skirt','Dress','Jacket','Jeans','Jumpsuit','Pant','Skirt','Top'))
 ColorGroup = st.selectbox('Choose your Type Of Color Type',('Beige','Black','Blue','Brown','Gold','Gray','Green','Indigo','Multi-colored','Orange','Pink','Purple','Red','Violet','White','Yellow'))
 Pattern = st.selectbox('Choose your Type Of Print',('Animal Print','Colorblock','Floral','Graphic','Plaid','Stripes','Whimsical'))
@@ -64,25 +57,13 @@ X_test = {
   "Occassion": np.where(np.unique(X5)==Occassion),
   "Silhouette": np.where(np.unique(X6)==Silhouette)}
 
+# Load the pickled model
+model = pickle.load(open(filename, 'rb'))
 predictions = model.predict(pd.DataFrame(X_test))
 probability = predictions * 100
 st.write('Likelihood % for the new product: '+ str(round(probability[0],2)) + '%')
 
-#gam.summary()
 
-#for i, term in enumerate(gam.terms):
-    #if term.isintercept:
-        #continue
-    
-    #XX = gam.generate_X_grid(term=i)
-    #pdep, confi = gam.partial_dependence(term=i, X=XX, width=0.95)
-    #plt.figure()
-    #plt.plot(XX[:, term.feature], pdep)
-    #plt.plot(XX[:, term.feature], confi, c='r', ls='--')
-    #plt.title(repr(term))
-    #plt.show()
-
-#print("Conversions", predictions)
 
 
 # In[ ]:
