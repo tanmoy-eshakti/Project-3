@@ -19,7 +19,7 @@ filename = 'finalized_model.sav'
 #Pageview per user
 Viewperuser = 242222765/17903179
 data['conversion'] = data['Orders']/(data['Users']*Viewperuser)
-data.fillna('', inplace=True)
+data.fillna('None',inplace=True)
 #df = pd.DataFrame(data,columns=['Productid','ProductStyle','Color','ColorGroup','Fabric','Occassion','Silhouette','Season','Pattern','FabricType'])
 le = preprocessing.LabelEncoder()
 data['ProductStyle']= le.fit_transform(data['ProductStyle'])
