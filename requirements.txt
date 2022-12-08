@@ -1,5 +1,6 @@
 
 pygam
+scikit-learn
 sklearn
 matplotlib
 pip>=22.3
